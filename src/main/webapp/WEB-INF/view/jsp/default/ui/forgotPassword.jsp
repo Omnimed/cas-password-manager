@@ -19,10 +19,10 @@
 
 <jsp:directive.include file="includes/top.jsp" />
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/cas-pm.css" />" />
-<jsp:directive.page import="net.tanesha.recaptcha.ReCaptcha" />
-<jsp:directive.page import="net.tanesha.recaptcha.ReCaptchaFactory" />
-<c:set var="recaptchaPublicKey" scope="page" value="${recaptchaPublicKey}"/>
-<c:set var="recaptchaPrivateKey" scope="page" value="${recaptchaPrivateKey}"/>
+<%-- <jsp:directive.page import="net.tanesha.recaptcha.ReCaptcha" /> --%>
+<%-- <jsp:directive.page import="net.tanesha.recaptcha.ReCaptchaFactory" /> --%>
+<%-- <c:set var="recaptchaPublicKey" scope="page" value="${recaptchaPublicKey}"/> --%>
+<%-- <c:set var="recaptchaPrivateKey" scope="page" value="${recaptchaPrivateKey}"/> --%>
 
 <c:url value="/login" var="formActionUrl" />
 
@@ -32,35 +32,46 @@
         <h2><spring:message code="pm.forgotPassword.header" /></h2>
         <c:if test="${not empty forgotPasswordValidationError}">
         <div class="errors" style="width:250px;">
-            <spring:message code="pm.forgotPassword.generic-error" />
+            <spring:message code="pm.form.netid.error.empty" />
         </div>
         </c:if>
-        <p class="note"><spring:message code="pm.forgotPassword.heading-text" /></p>
+		<form:errors path="*" cssClass="errors" id="status" element="div" />
+        <p class="info"><spring:message code="pm.forgotPassword.heading-text" /></p>
         <div class="row fl-controls-left">
-            <label class="fl-label" for="username"><spring:message code="pm.form.netid" /></label>
-            <spring:message code="pm.form.netid.accesskey" var="netIdAccessKey" />
-            <form:input path="netId" type="text" autocomplete="false" size="25" accesskey="${netIdAccessKey}" tabindex="1" cssClass="required" id="netId"/>
-            <form:errors path="netId" cssClass="error"/>
-        </div>
-        
-        <div>
-            <label class="fl-label" for="recaptcha"><spring:message code="pm.recaptcha.prompt" /></label>
-            <%
-            ReCaptcha c = ReCaptchaFactory.newSecureReCaptcha((String)pageContext.getAttribute("recaptchaPublicKey"),
-                    (String)pageContext.getAttribute("recaptchaPrivateKey"), true);
-            out.print(c.createRecaptchaHtml(null, null));
-            %>
+            <form:input path="netId" type="text" autocomplete="false" size="25" tabindex="1" cssClass="required" id="netId"/>
         </div>
         
         <div class="row btn-row">
             <input type="hidden" name="execution" value="${flowExecutionKey}"/>
             <input type="hidden" name="_eventId" value="submitId">
             <input type="hidden" name="lt" value="${loginTicket}"/>
-            <input type="submit" tabindex="2" value="<spring:message code="pm.form.submit" />" accesskey="<spring:message code="pm.form.submit.accesskey" />" name="submit" class="btn-submit">
-            <input type="reset" tabindex="3" value="<spring:message code="pm.form.clear" />" accesskey="<spring:message code="pm.form.clear.accesskey" />" name="reset" class="btn-reset">
+            
+		<div style="height:70px;">
+			<input class="btn-submit" name="submit" accesskey="l" value="<spring:message code="screen.welcome.button.submit" />" tabindex="4" type="submit" />
+		</div>
         </div>
     
     </form:form>
 </div>
+<div class="languageBar">
+	<c:set var="googleUrl" value="https://support.google.com/chrome/bin/answer.py?hl=" />
+	<c:set var="googleEndUrl" value="&answer=95416&topic=1678461&ctx=topic" />
+	<c:set var="language" value="${pageContext.request.locale.language}" />
+	<c:choose>
+		<c:when test="${language == 'en'}">
+			<c:set var="googleLangageUrl" value="fr" />
+		</c:when>
+		<c:otherwise>
+			<c:set var="googleLangageUrl" value="en" />
+		</c:otherwise>
+	</c:choose>
+	<a href="${googleUrl}${googleLangageUrl}${googleEndUrl}" target="_blank">
+		<spring:message code="screen.welcome.changelanguage" />
+	</a>
 
-<jsp:directive.include file="includes/bottom.jsp" />
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#netId').watermark('<spring:message code="screen.welcome.label.netid" />');
+	});
+</script>

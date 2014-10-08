@@ -146,6 +146,7 @@ public abstract class AbstractLdapServer implements LdapServer, InitializingBean
 		logger.debug("Found result for " + username + " under base " 
 				+ ldapContextSource.getBaseLdapPathAsString() + " with "
 				+ "searchBase " + searchBase);
+		
 		return results.get(0);
 	}
 	
