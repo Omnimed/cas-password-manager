@@ -166,7 +166,7 @@
 				var isReady = false;
 				
 				if ( newPswd.length >= 8 ) {
-					if ( pswd.match(/[A-Z]/) && pswd.match(/[a-z]/)) {
+					if ( newPswd.match(/[A-Z]/) && newPswd.match(/[a-z]/)) {
 						if ( newPswd.match(/\d/) ) {
 							if ( newPswd === confirmPswd) {
 								isReady = true;

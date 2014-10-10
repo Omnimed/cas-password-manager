@@ -36,6 +36,30 @@ input:focus {
 	border-color: #3E5C99;
 }
 
+input[type=reset] {
+	background-image: -webkit-linear-gradient(top,#F9F9F9 0,#E3E3E3 100%);
+	background-image: linear-gradient(to bottom,#F9F9F9 0,#E3E3E3 100%);
+	background-color: #EBEBEA;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: 1px solid #918E8C;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+	color: white;
+	cursor: pointer;
+	display: inline-block;
+	color: #333333;
+	font-family: helvetica, arial, verdana, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	height: 40px;
+	margin-top: 15px;
+	padding: 8px 15px;
+	text-decoration: none;
+	text-shadow: 0 1px 0 white;
+	width: initial;
+}
+
 input[type=submit] {
 	background-image: -webkit-linear-gradient(top,#F9F9F9 0,#E3E3E3 100%);
 	background-image: linear-gradient(to bottom,#F9F9F9 0,#E3E3E3 100%);
