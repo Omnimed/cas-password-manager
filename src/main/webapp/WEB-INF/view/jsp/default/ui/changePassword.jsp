@@ -40,10 +40,10 @@
 			</c:otherwise>
 		</c:choose>
 
-		<form:errors path="username" cssClass="errors" />
-		<form:errors path="oldPassword" cssClass="errors" />
-		<form:errors path="newPassword" cssClass="errors" />
-		<form:errors path="confirmNewPassword" cssClass="errors" />
+		<form:errors path="username" cssClass="errors" element="div" />
+		<form:errors path="oldPassword" cssClass="errors" element="div" />
+		<form:errors path="newPassword" cssClass="errors" element="div" />
+		<form:errors path="confirmNewPassword" cssClass="errors" element="div" />
 
 		<div class="row fl-controls-left">
 			<c:choose>

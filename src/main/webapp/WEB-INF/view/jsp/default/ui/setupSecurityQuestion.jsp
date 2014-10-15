@@ -34,32 +34,21 @@
 			<spring:message code="pm.setupSecurityQuestion.heading-text" />
 		</p>
 		<div class="row fl-controls-left">
-			<label class="fl-label" for="username"><spring:message
-					code="pm.form.netid" /></label> <input type="text" disabled="disabled"
+			 <input type="text" disabled="disabled"
 				autocomplete="false" size="25" value="${username}" tabindex="1"
 				class="required" name="username" id="username" />
 		</div>
 		<div class="row fl-controls-left">
-			<label class="fl-label" for="questionText"><spring:message
-					code="pm.setupSecurityQuestion.prompt.question" /></label>
-			<spring:message
-				code="pm.setupSecurityQuestion.prompt.question.accesskey"
-				var="setupQuestionAccessKey" />
 			<form:input path="questionText" type="text" autocomplete="off"
-				size="25" value="" accesskey="${setupQuestionAccessKey}"
+				size="25" value=""
 				tabindex="2" cssClass="required" id="questionText" />
-			<form:errors path="questionText" cssClass="errors" />
+			<form:errors path="questionText" cssClass="errors" element="div" />
 		</div>
 		<div class="row fl-controls-left">
-			<label class="fl-label" for="responseText"><spring:message
-					code="pm.setupSecurityQuestion.prompt.answer" /></label>
-			<spring:message
-				code="pm.setupSecurityQuestion.prompt.answer.accesskey"
-				var="answerAccessKey" />
 			<form:input path="responseText" type="text" autocomplete="off"
-				size="25" value="" accesskey="${answerAccessKey}" tabindex="3"
+				size="25" value="" tabindex="3"
 				cssClass="required" id="responseText" />
-			<form:errors path="responseText" cssClass="errors" />
+			<form:errors path="responseText" cssClass="errors" element="div" />
 		</div>
 		<div class="row btn-row">
 			<input type="hidden" name="lt" value="${loginTicket}" /> <input
@@ -74,5 +63,12 @@
 
 	</form:form>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#username').watermark('<spring:message code="pm.form.netid" />');
+	    $('#questionText').watermark('<spring:message code="pm.setupSecurityQuestion.prompt.question" />');
+	    $('#responseText').watermark('<spring:message code="pm.setupSecurityQuestion.prompt.answer" />');
+    });
+</script>
 
 <jsp:directive.include file="includes/bottom.jsp" />
