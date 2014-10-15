@@ -34,6 +34,6 @@
 			</a>
 		</div>
 		<div class="languageBar">
-			<a href="/cas/login?service=${service}"><spring:message code="pm.helpDesk.exit-link.text" /></a>   
+			<a href="/omnimed"><spring:message code="pm.helpDesk.exit-link.text" /></a>   
 		</div>
 <jsp:directive.include file="includes/bottom.jsp" />
