@@ -116,7 +116,7 @@ label {
 .info {
 	background-color: #9acced !important;
 	font-weight: bold;
-	color: #3a87ad !important;
+	color: #333 !important;
 	background-image: url("../images/info.png");
 	background-repeat: no-repeat, repeat;
 	background-position: 5px 5px, 0 0 !important;
