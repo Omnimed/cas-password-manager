@@ -30,21 +30,6 @@ input {
 	width: 331px;
 }
 
-input[type=reset] {
-	background-color: #3598DB;
-	cursor: pointer;
-	display: inline-block;
-	color: #FFFFFF;
-	font-family: helvetica, arial, verdana, sans-serif;
-	width: 348px;
-	font-size: 15px;
-	font-weight: bold;
-	height: 40px;
-	margin-top: -8px;
-	margin-bottom: 15px;
-	text-decoration: none;
-}
-
 input[type=submit] {
 	background-color: #3598DB;
 	cursor: pointer;

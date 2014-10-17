@@ -53,9 +53,7 @@
 				type="hidden" name="execution" value="${flowExecutionKey}" /> <input
 				type="submit" tabindex="5"
 				value="<spring:message code="pm.form.submit" />" name="submit"
-				class="btn-submit"> <input type="reset" tabindex="6"
-				value="<spring:message code="pm.form.clear" />" name="reset"
-				class="btn-reset">
+				class="btn-submit">
 		</div>
 
 	</form:form>
