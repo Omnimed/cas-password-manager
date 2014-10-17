@@ -131,7 +131,6 @@ label {
 	background-position: 5px 5px, 0 0 !important;	
 
 	padding: 2% 2% 2% 12%;
-	text-shadow: 1px 1px 1px #f9f9f9;
 }
 
 .success {
@@ -141,7 +140,6 @@ label {
 	background-repeat: no-repeat, repeat;
 	background-position: 5px 5px, 0 0 !important;	
 	padding: 2% 2% 2% 12%;
-	text-shadow: 1px 1px 1px #f9f9f9;
 }
 
 .successBackLink {
@@ -156,7 +154,6 @@ label {
 	background-repeat: no-repeat, repeat;
 	background-position: 5px 5px, 0 0 !important;	
 	padding: 2% 2% 2% 12%;
-	text-shadow: 1px 1px 1px #f9f9f9;
 }
 #content .errors h2,#content .success h2,#content .warning h2 {
 	font-family: Georgia, "Times New Roman", Times, serif;
@@ -215,7 +212,6 @@ input::-webkit-input-placeholder {
 	margin: 0 5px;
 	padding: 3px 5px;
 	position: relative;
-	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
 	top: -1px;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;

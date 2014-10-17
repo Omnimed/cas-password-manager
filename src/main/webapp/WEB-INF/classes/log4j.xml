@@ -101,12 +101,12 @@
     </logger>
 
     <logger name="org.jasig" additivity="true">
-        <level value="DEBUG" />
+        <level value="INFO" />
         <appender-ref ref="cas" />
     </logger>
 
     <logger name="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager">
-        <level value="DEBUG" />
+        <level value="INFO" />
         <appender-ref ref="cas" />
     </logger>
 
@@ -116,22 +116,22 @@
         cleartext authentication credentials
     -->
     <logger name="org.jasig.cas.web.flow" additivity="true">
-        <level value="DEBUG" />
+        <level value="INFO" />
         <appender-ref ref="cas" />
     </logger>
     
     <logger name="org.jasig.cas.authentication" additivity="false">
-        <level value="DEBUG" />
+        <level value="INFO" />
         <appender-ref ref="cas" />
     </logger>
     
     <logger name="org.jasig.cas.adaptors" additivity="false">
-        <level value="TRACE" />
+        <level value="INFO" />
         <appender-ref ref="cas" />
     </logger>
     
     <logger name="net.unicon.cas.passwordmanager" additivity="false">
-        <level value="DEBUG" />
+        <level value="INFO" />
         <appender-ref ref="cas" />
         <appender-ref ref="console" />
     </logger>
