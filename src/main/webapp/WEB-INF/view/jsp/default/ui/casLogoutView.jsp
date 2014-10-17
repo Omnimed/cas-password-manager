@@ -19,7 +19,6 @@
 
 <jsp:directive.include file="includes/top.jsp" />
 
-		<h2><spring:message code="screen.logout.header" /></h2>
 		<div id="msg" class="success">
 			<spring:message code="screen.logout.success" />
 		</div>

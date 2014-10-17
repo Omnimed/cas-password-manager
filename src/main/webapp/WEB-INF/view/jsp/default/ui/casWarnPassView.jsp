@@ -11,17 +11,6 @@
   <c:param name="execution" value="${flowExecutionKey}"/>
   <c:param name="_eventId" value="ignore"/>
 </c:url>
-  <p>
-    <c:if test="${expireDays == 0}">
-      <h2><spring:message code="screen.warnpass.heading.today" /></h2>
-    </c:if>
-    <c:if test="${expireDays == 1}">
-      <h2><spring:message code="screen.warnpass.heading.tomorrow" /></h2>
-    </c:if>
-    <c:if test="${expireDays > 1}">
-      <h2><spring:message code="screen.warnpass.heading.other" arguments="${expireDays}" /></h2>
-    </c:if>
-  </p>
 
 <div class="warning">
 

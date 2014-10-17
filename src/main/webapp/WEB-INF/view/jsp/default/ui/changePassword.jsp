@@ -27,19 +27,6 @@
 	<form:form method="post" action="${formActionUrl}"
 		class="fm-v clearfix" modelAttribute="changePasswordBean">
 
-		<c:choose>
-			<c:when test="${pwdChangeForced}">
-				<h2>
-					<spring:message code="pm.changePassword.header.forced" />
-				</h2>
-			</c:when>
-			<c:otherwise>
-				<h2>
-					<spring:message code="pm.setPassword.header" />
-				</h2>
-			</c:otherwise>
-		</c:choose>
-
 		<form:errors path="username" cssClass="errors" element="div" />
 		<form:errors path="oldPassword" cssClass="errors" element="div" />
 		<form:errors path="newPassword" cssClass="errors" element="div" />
@@ -151,7 +138,7 @@
 				$('#capital').hide();
 				$('#length').hide();
 				$('#number').hide();
-				$('#pswd_info').css({ top: $(this).offset().top - 25 + 'px' });
+				$('#pswd_info').css({ top: $(this).offset().top - 15 + 'px' });
 				$('#pswd_info').css({ left: $(this).width() + $(this).offset().left + 30 + 'px' });
 				isSubmitReady();
 				$('#pswd_info').show();

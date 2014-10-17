@@ -29,7 +29,6 @@
 <div id="admin" class="useradmin">
     <form:form method="post" action="${formActionUrl}" cssClass="fm-v clearfix" modelAttribute="netIdBean">
    
-        <h2><spring:message code="pm.forgotPassword.header" /></h2>
         <c:if test="${not empty forgotPasswordValidationError}">
         <div class="errors" style="width:250px;">
             <spring:message code="pm.form.netid.error.empty" />

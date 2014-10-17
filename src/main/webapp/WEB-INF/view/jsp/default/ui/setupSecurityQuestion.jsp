@@ -27,9 +27,6 @@
 	<form:form method="post" action="${formActionUrl}"
 		modelAttribute="securityQuestion" cssClass="fm-v clearfix">
 
-		<h2>
-			<spring:message code="pm.setupSecurityQuestion.header" />
-		</h2>
 		<p class="info">
 			<spring:message code="pm.setupSecurityQuestion.heading-text" />
 		</p>

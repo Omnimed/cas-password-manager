@@ -26,7 +26,6 @@
     <c:param name="service" value="${param.service}" />
     <c:param name="renew" value="true" />
 </c:url>
-			<h2><spring:message code="screen.service.sso.error.header" /></h2>
 		<div id="msg" class="errors">
 			<spring:message code="screen.service.sso.error.message"  arguments="${url}" />
 		</div>

@@ -28,10 +28,6 @@
 
 <div id="admin" class="useradmin">
 
-	<h2>
-		<spring:message code="pm.changedSecurityQuestion.header" />
-	</h2>
-
 	<p class="success">
 		<c:choose>
 			<c:when test="${pmExtra eq 'wait'}">

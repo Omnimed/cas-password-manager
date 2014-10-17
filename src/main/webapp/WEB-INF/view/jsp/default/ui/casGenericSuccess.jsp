@@ -18,7 +18,6 @@
   --%>
 
 <jsp:directive.include file="includes/top.jsp" />
-		<h2><spring:message code="screen.success.header" /></h2>
 		<div id="msg" class="success">
 			<spring:message code="screen.success.success" /></br>
 			<spring:message code="screen.success.security" />

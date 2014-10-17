@@ -25,9 +25,6 @@
 <div id="admin" class="useradmin">
 	<form method="post" action="${formActionUrl}" class="fm-v clearfix"
 		id="">
-		<h2>
-			<spring:message code="pm.forgotPassword.header" />
-		</h2>
 		<c:if test="${not empty securityQuestionValidationError}">
 			<div class="errors" style="width: 250px;">
 				<spring:message code="pm.answerSecurityQuestion.error" />

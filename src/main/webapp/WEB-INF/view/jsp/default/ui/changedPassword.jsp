@@ -27,10 +27,6 @@
 
 <div id="admin" class="useradmin">
 
-	<h2>
-		<spring:message code="pm.changedPassword.header" />
-	</h2>
-
 	<p class="info">
 		<c:choose>
 			<c:when test="${pmExtra eq 'wait'}">
