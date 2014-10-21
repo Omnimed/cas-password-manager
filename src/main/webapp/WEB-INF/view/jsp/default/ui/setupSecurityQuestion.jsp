@@ -30,6 +30,8 @@
 		<p class="info">
 			<spring:message code="pm.setupSecurityQuestion.heading-text" />
 		</p>
+		<form:errors path="questionText" cssClass="errors" element="div" />
+		<form:errors path="responseText" cssClass="errors" element="div" />
 		<div class="row fl-controls-left">
 			 <input type="text" disabled="disabled"
 				autocomplete="false" size="25" value="${username}" tabindex="1"
@@ -39,13 +41,11 @@
 			<form:input path="questionText" type="text" autocomplete="off"
 				size="25" value=""
 				tabindex="2" cssClass="required" id="questionText" />
-			<form:errors path="questionText" cssClass="errors" element="div" />
 		</div>
 		<div class="row fl-controls-left">
 			<form:input path="responseText" type="text" autocomplete="off"
 				size="25" value="" tabindex="3"
 				cssClass="required" id="responseText" />
-			<form:errors path="responseText" cssClass="errors" element="div" />
 		</div>
 		<div class="row btn-row">
 			<input type="hidden" name="lt" value="${loginTicket}" /> <input

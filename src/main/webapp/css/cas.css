@@ -109,6 +109,7 @@ label {
 }
 
 .errors {
+	background-color: #f2dede !important;
 	color: #333 !important;
 
 	background-image: url("../images/error.png");
@@ -119,8 +120,9 @@ label {
 }
 
 .success {
+	background-color: #ddffaa !important;
 	color: #333 !important;
-
+	
 	background-image:url("../images/confirm.png");
 	background-repeat: no-repeat, repeat;
 	background-position: 5px 5px, 0 0 !important;	
@@ -133,6 +135,7 @@ label {
 
 
 .warning {
+	background-color: #c09853 !important;
 	color: #333 !important;
 
 	background-image: url("../images/warning.png");
@@ -225,7 +228,7 @@ input::-webkit-input-placeholder {
 	left: -10px;
 	font-size: 40px;
 	line-height:14px;
-	color:#ddd;
+	color:white;
 	text-shadow:none;
 	display:block;
 }

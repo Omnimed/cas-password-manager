@@ -171,7 +171,7 @@
     </action-state>
 	
 	<decision-state id="securityQuestionNeeded">
-		<if test="requestParameters.flashScope != '' and requestParameters.flashScope != null" then="setSetupSecurityQuestionScope" else="lookupSecurityQuestion" />
+		<if test=" requestParameters.flashScope != null and requestParameters.flashScope != ''" then="setSetupSecurityQuestionScope" else="lookupSecurityQuestion" />
 	</decision-state>
 	
 	<action-state id="setSetupSecurityQuestionScope">

@@ -23,7 +23,10 @@
 			<spring:message code="screen.logout.success" />
 		</div>
 		<div class="" style="padding-bottom: 10px;">
-			<spring:message code="screen.logout.security" /></br></br>
+		
+		<div id="msg" class="info">
+			<spring:message code="screen.logout.security" />
+		</div>
 			<c:set var="googleUrl" value="http://support.google.com/chrome/bin/answer.py?hl=" />
 			<c:set var="googleEndUrl" value="&answer=95582" />
 			<c:set var="language" value="${pageContext.request.locale.language}" />

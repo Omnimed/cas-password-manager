@@ -48,20 +48,20 @@
 		</div>
 		<c:if test="${flowRequestContext.currentState.id != 'setPassword'}">
 			<div class="row fl-controls-left">
-				<form:input path="oldPassword" type="password" autocomplete="off" onkeypress="capLock(event)"
+				<form:input path="oldPassword" type="password" autocomplete="off"
 					size="25" tabindex="2" cssClass="required" id="oldPassword" />
-				<div id="divMayus1" class="capsLock"><spring:message code="screen.capsLockOn" /></div>
 			</div>
 		</c:if>
 		<div class="row fl-controls-left">
-			<form:input path="newPassword" type="password" autocomplete="off"
+			<form:input path="newPassword" type="password" autocomplete="off" onkeypress="newPasswordcapLock(event)"
 				size="25" tabindex="3" cssClass="required" id="newPassword" />
+				<div id="newPasswordCapsLock" class="capsLock"><spring:message code="screen.capsLockOn" /></div>
 		</div>
 		<div class="row fl-controls-left">
-			<form:input path="confirmNewPassword" type="password" onkeypress="capLock2(event)"
+			<form:input path="confirmNewPassword" type="password" onkeypress="confirmNewPasswordcapLock(event)"
 				autocomplete="off" size="25" tabindex="4" cssClass="required"
 				id="confirmNewPassword" />
-			<div id="divMayus2" class="capsLock"><spring:message code="screen.capsLockOn" /></div>
+			<div id="confirmNewPasswordCapsLock" class="capsLock"><spring:message code="screen.capsLockOn" /></div>
 		</div>
 		<div class="row btn-row">
 			<input type="hidden" value="${loginTicket}" name="lt"> <input
@@ -84,67 +84,76 @@
 			</ul>
 		</div>
 		<script type="text/javascript">
+//			Validate the condition on each keyup, show the dialog on focus and hide the dialog on blur
 			$('#newPassword').keyup(function() {
 				// set password variable
 				var pswd = $(this).val();
 				
 				//validate the length
-				if ( pswd.length < 8 ) {
-					$('#length').removeClass('valid').addClass('invalid');
-				} else {
-					$('#length').removeClass('invalid').addClass('valid');
-				}
+				validateCondition($('#length'), pswd.length < 8);
 
 				//validate capital letter
-				if ( pswd.match(/[A-Z]/) && pswd.match(/[a-z]/)) {
-					$('#capital').removeClass('invalid').addClass('valid');
-				} else {
-					$('#capital').removeClass('valid').addClass('invalid');
-				}
+				validateCondition($('#capital'), pswd.match(/[A-Z]/) && pswd.match(/[a-z]/));
 
 				//validate number
-				if ( pswd.match(/\d/) ) {
-					$('#number').removeClass('invalid').addClass('valid');
-				} else {
-					$('#number').removeClass('valid').addClass('invalid');
-				}
+				validateCondition($('#number'), pswd.match(/\d/));
+				
 				isSubmitReady();
 			}).focus(function() {
-				$('#same').hide();
-				$('#capital').show();
-				$('#length').show();
-				$('#number').show();
-				$('#pswd_info').css({ top: $(this).offset().top - 50 + 'px' });
-				$('#pswd_info').css({ left: $(this).width() + $(this).offset().left + 30 + 'px' });
+				showNewPasswordConfirmation();
 				isSubmitReady();
-				$('#pswd_info').show();
 			}).blur(function() {
 				$('#pswd_info').hide();
 			});
+			
+// 			Validate the condition on each keyup, show the dialog on focus and hide the dialog on blur
 			$('#confirmNewPassword').keyup(function() {
 				// set password variable
 				var newPswd = $('#newPassword').val();
 				var pswd = $(this).val();
 				
 				//validate the length
-				if ( pswd != newPswd) {
-					$('#same').removeClass('valid').addClass('invalid');
-				} else {
-					$('#same').removeClass('invalid').addClass('valid');
-				}
+				validateCondition($('#same'), pswd != newPswd);
+				
 				isSubmitReady();
 			}).focus(function() {
+				showConfirmNewPasswordConfirmation();
+				isSubmitReady();
+			}).blur(function() {
+				$('#pswd_info').hide();
+			});
+			
+// 			Validate the condition and set the right state to the element
+			function validateCondition(element, condition) {
+				if (condition) {
+					element.removeClass('invalid').addClass('valid');
+				} else {
+					element.removeClass('valid').addClass('invalid');
+				}
+			}
+			
+// 			Display the pwd confirmation box for the right input box
+			function showNewPasswordConfirmation() {
+				$('#same').hide();
+				$('#capital').show();
+				$('#length').show();
+				$('#number').show();
+				$('#pswd_info').css({ top: $(this).offset().top - 50 + 'px' });
+				$('#pswd_info').css({ left: $(this).width() + $(this).offset().left + 30 + 'px' });
+				$('#pswd_info').show();				
+			}
+			
+			function showConfirmNewPasswordConfirmation() {
 				$('#same').show();
 				$('#capital').hide();
 				$('#length').hide();
 				$('#number').hide();
 				$('#pswd_info').css({ top: $(this).offset().top - 15 + 'px' });
 				$('#pswd_info').css({ left: $(this).width() + $(this).offset().left + 30 + 'px' });
-				isSubmitReady();
-				$('#pswd_info').show();
-			}).blur(function() {
-				$('#pswd_info').hide();
-			});
+				$('#pswd_info').show();			
+			}
+			
+// 			Validate if the submit button should be enable or disable and apply the good state			
 			function isSubmitReady() {
 
 				var newPswd = $('#newPassword').val();
@@ -169,22 +178,26 @@
 				}
 				
 			}
-			function capLock(e){
-				 kc = e.keyCode?e.keyCode:e.which;
-				 sk = e.shiftKey?e.shiftKey:((kc == 16)?true:false);
-				 if(((kc >= 65 && kc <= 90) && !sk)||((kc >= 97 && kc <= 122) && sk))
-				  document.getElementById('divMayus1').style.visibility = 'visible';
+			
+// 			Validate if the caps lock key is on. Call made in the form:input
+			function newPasswordcapLock(e){
+				 if(isCapsLockOn(e))
+				  document.getElementById('newPasswordCapsLock').style.visibility = 'visible';
 				 else
-				  document.getElementById('divMayus1').style.visibility = 'hidden';
+				  document.getElementById('newPasswordCapsLock').style.visibility = 'hidden';
 				}
-			function capLock2(e){
-				 kc = e.keyCode?e.keyCode:e.which;
-				 sk = e.shiftKey?e.shiftKey:((kc == 16)?true:false);
-				 if(((kc >= 65 && kc <= 90) && !sk)||((kc >= 97 && kc <= 122) && sk))
-				  document.getElementById('divMayus2').style.visibility = 'visible';
+			function confirmNewPasswordcapLock(e){
+				 if(isCapsLockOn(e))
+				  document.getElementById('confirmNewPasswordCapsLock').style.visibility = 'visible';
 				 else
-				  document.getElementById('divMayus2').style.visibility = 'hidden';
+				  document.getElementById('confirmNewPasswordCapsLock').style.visibility = 'hidden';
 				}
+			
+			function isCapsLockOn(e) {
+				kc = e.keyCode?e.keyCode:e.which;
+				sk = e.shiftKey?e.shiftKey:((kc == 16)?true:false);
+				return ((kc >= 65 && kc <= 90) && !sk)||((kc >= 97 && kc <= 122) && sk);
+			}
 		</script>
 
 	</form:form>
