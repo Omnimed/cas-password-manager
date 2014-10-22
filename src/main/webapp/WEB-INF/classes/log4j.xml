@@ -32,7 +32,7 @@
     </appender>
 
     <appender name="cas" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="cas.log" />
+        <param name="File" value="logs/cas.log" />
         <param name="MaxFileSize" value="512KB" />
         <param name="MaxBackupIndex" value="3" />
         <layout class="org.apache.log4j.PatternLayout">
@@ -55,7 +55,7 @@
 
     <!-- This file appender is used to output aggregated performance statistics -->
     <appender name="fileAppender" class="org.apache.log4j.FileAppender">
-        <param name="File" value="perfStats.log"/>
+        <param name="File" value="logs/perfStats.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%m%n"/>
         </layout>
@@ -82,7 +82,7 @@
       upstream loggers.
     -->
     <logger name="org.perf4j.TimingLogger" additivity="false">
-        <level value="INFO" />
+        <level value=""ERROR"" />
         <appender-ref ref="CoalescingStatistics" />
     </logger>
 
@@ -101,12 +101,12 @@
     </logger>
 
     <logger name="org.jasig" additivity="true">
-        <level value="INFO" />
+        <level value="ERROR" />
         <appender-ref ref="cas" />
     </logger>
 
     <logger name="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager">
-        <level value="INFO" />
+        <level value=""ERROR"" />
         <appender-ref ref="cas" />
     </logger>
 
@@ -116,22 +116,22 @@
         cleartext authentication credentials
     -->
     <logger name="org.jasig.cas.web.flow" additivity="true">
-        <level value="INFO" />
+        <level value=""ERROR"" />
         <appender-ref ref="cas" />
     </logger>
     
     <logger name="org.jasig.cas.authentication" additivity="false">
-        <level value="DEBUG" />
+        <level value=""ERROR"" />
         <appender-ref ref="cas" />
     </logger>
     
     <logger name="org.jasig.cas.adaptors" additivity="false">
-        <level value="DEBUG" />
+        <level value=""ERROR"" />
         <appender-ref ref="cas" />
     </logger>
     
     <logger name="net.unicon.cas.passwordmanager" additivity="false">
-        <level value="DEBUG" />
+        <level value=""ERROR"" />
         <appender-ref ref="cas" />
         <appender-ref ref="console" />
     </logger>

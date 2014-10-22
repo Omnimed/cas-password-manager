@@ -18,28 +18,31 @@
   --%>
 
 <jsp:directive.include file="includes/top.jsp" />
-<link type="text/css" rel="stylesheet" href="<c:url value="/css/cas-pm.css" />" />
-<c:url var="loginUrl" value="/login">
-    <c:if test="${not empty service}">
-        <c:param name="service" value="${service}" />
-    </c:if>
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/css/cas-pm.css" />" />
+<c:url var="loginUrl" value="/cas/login">
+	<c:if test="${not empty service}">
+		<c:param name="service" value="${service}" />
+	</c:if>
 </c:url>
 
 <div id="admin" class="useradmin">
-   
-        <h2><spring:message code="pm.setPassword.header" /></h2>
 
-        <p class="note">
-        <c:choose>
-        <c:when test="${pmExtra eq 'wait'}">
-            <spring:message code="pm.setPassword.wait" arguments="${loginUrl}" />
-        </c:when>
-        <c:otherwise>
-            <spring:message code="pm.setPassword.text" arguments="${loginUrl}" />            
-        </c:otherwise>
-        </c:choose>        
-        </p>
-            
+	<p class="success">
+		<c:choose>
+			<c:when test="${pmExtra eq 'wait'}">
+				<spring:message code="pm.setPassword.wait" arguments="${loginUrl}" />
+			</c:when>
+			<c:otherwise>
+				<spring:message code="pm.setPassword.text" arguments="${loginUrl}" />
+			</c:otherwise>
+		</c:choose>
+	</p>
+
+</div>
+<div class="languageBar">
+	<a href="/cas/login?service=${service}"><spring:message
+			code="pm.helpDesk.exit-link.text" /></a>
 </div>
 
 <jsp:directive.include file="includes/bottom.jsp" />

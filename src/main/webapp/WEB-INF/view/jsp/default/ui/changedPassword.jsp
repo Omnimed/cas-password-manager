@@ -18,27 +18,32 @@
   --%>
 
 <jsp:directive.include file="includes/top.jsp" />
-<link type="text/css" rel="stylesheet" href="<c:url value="/css/cas-pm.css" />" />
-<c:url var="continueUrl" value="login">
-    <c:param name="_eventId" value="continue" />
-    <c:param name="execution" value="${flowExecutionKey}" />
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/css/cas-pm.css" />" />
+<c:url var="continueUrl" value="login?service=${service}">
+	<c:param name="_eventId" value="continue" />
+	<c:param name="execution" value="${flowExecutionKey}" />
 </c:url>
 
 <div id="admin" class="useradmin">
-   
-        <h2><spring:message code="pm.changedPassword.header" /></h2>
 
-        <p class="note">
-        <c:choose>
-        <c:when test="${pmExtra eq 'wait'}">
-            <spring:message code="pm.changedPassword.wait" arguments="${continueUrl}" />
-        </c:when>
-        <c:otherwise>
-            <spring:message code="pm.changedPassword.text" arguments="${continueUrl}" />            
-        </c:otherwise>
-        </c:choose>
-        </p>
-            
+	<p class="info">
+		<c:choose>
+			<c:when test="${pmExtra eq 'wait'}">
+				<div id="msg" class="success">
+					<spring:message code="pm.changedPassword.wait"
+						arguments="${continueUrl}" />
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div id="msg" class="success">
+					<spring:message code="pm.changedPassword.text"
+						arguments="${continueUrl}" />
+				</div>
+			</c:otherwise>
+		</c:choose>
+	</p>
+
 </div>
 
 <jsp:directive.include file="includes/bottom.jsp" />

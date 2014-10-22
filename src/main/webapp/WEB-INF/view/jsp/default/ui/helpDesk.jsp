@@ -20,14 +20,10 @@
 <jsp:directive.include file="includes/top.jsp" />
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/cas-pm.css" />" />
 
-    <div id="msg" class="info">
-        <h2><spring:message code="pm.helpDesk.header" /></h2>
-        
-        <p><spring:message code="pm.helpDesk.text" /></p>
-        
-        <br />
-        
-        <p><a href="<c:url value="/login" />"><spring:message code="pm.helpDesk.exit-link.text" /></a></p>
-    </div>
+    <div id="msg" class="errors">
+        <spring:message code="pm.helpDesk.text" />
+    </div>        
 
-<jsp:directive.include file="includes/bottom.jsp" />
+<div class="languageBar">
+        <p><a href="/cas/login?service=${service}"><spring:message code="pm.helpDesk.exit-link.text" /></a></p>
+</div>

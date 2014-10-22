@@ -167,8 +167,17 @@
 	
     <action-state id="sendTicketGrantingTicket">
         <evaluate expression="sendTicketGrantingTicketAction" />
-        <transition to="lookupSecurityQuestion" />
+        <transition to="securityQuestionNeeded" />
     </action-state>
+	
+	<decision-state id="securityQuestionNeeded">
+		<if test=" requestParameters.flashScope != null and requestParameters.flashScope != ''" then="setSetupSecurityQuestionScope" else="lookupSecurityQuestion" />
+	</decision-state>
+	
+	<action-state id="setSetupSecurityQuestionScope">
+		<set name="flashScope.pmTask" value="'setupSecurityQuestion'"/>
+		<transition to="passwordManager" />
+	</action-state>
 
     <!-- Users are required to create a security question -->
     <action-state id="lookupSecurityQuestion">
