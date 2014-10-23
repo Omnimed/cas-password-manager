@@ -148,7 +148,7 @@
 				$('#capital').hide();
 				$('#length').hide();
 				$('#number').hide();
-				$('#pswd_info').css({ top: $(this).offset().top - 15 + 'px' });
+				$('#pswd_info').css({ top: $(this).offset().top + 5 + 'px' });
 				$('#pswd_info').css({ left: $(this).width() + $(this).offset().left + 30 + 'px' });
 				$('#pswd_info').show();			
 			}
@@ -173,8 +173,10 @@
 
 				if (isReady) {
 					$('#submit').removeAttr('disabled');
+					$('#submit').attr('aria-disabled', false)
 				} else {
 					$('#submit').attr('disabled','disabled');
+					$('#submit').attr('aria-disabled', true)
 				}
 				
 			}
