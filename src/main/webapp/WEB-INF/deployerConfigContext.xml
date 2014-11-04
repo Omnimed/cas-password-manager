@@ -124,9 +124,9 @@
 				<!-- <bean 
 					class="org.jasig.cas.authentication.handler.support.SimpleTestUsernamePasswordAuthenticationHandler" /> -->
 				
-<!-- 				<ref bean="lppeEnabledLdapAuthenticationHandler" /> -->
+				<ref bean="lppeEnabledLdapAuthenticationHandler" />
 
-				<ref bean="acceptUsersAuthenticationHandler" />
+<!-- 				<ref bean="acceptUsersAuthenticationHandler" /> -->
 				
 			</list>
 		</property>

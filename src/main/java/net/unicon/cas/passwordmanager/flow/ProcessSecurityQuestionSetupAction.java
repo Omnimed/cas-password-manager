@@ -22,7 +22,7 @@ public class ProcessSecurityQuestionSetupAction {
     	}
     	
     	List<SecurityQuestion> securityQuestions = new ArrayList<SecurityQuestion>();
-    	securityQuestions.add(new SecurityQuestion(securityQuestion.getQuestionText(),securityQuestion.getResponseText()));
+    	securityQuestions.add(new SecurityQuestion(securityQuestion.getQuestionText(),passwordManagerService.generatePassword()));
     	SecurityChallenge securityChallenge = new SecurityChallenge(username,securityQuestions);
 
     	passwordManagerService.setUserSecurityChallenge(username, securityChallenge);

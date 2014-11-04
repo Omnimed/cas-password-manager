@@ -7,6 +7,12 @@ import net.unicon.cas.passwordmanager.flow.SecurityChallenge;
 public interface LdapServer {
 	
 	public void ldapModify(String username, ModificationItem[] modificationItems);
+
+	public void setAccountLock(String username);
+
+	public void setAccountUnLock(String username);
+	
+	public void setMustChangePassword(String username) throws Exception;
 	
 	public void setPassword(String username, String password);
 	

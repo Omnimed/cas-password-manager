@@ -10,12 +10,35 @@ import net.unicon.cas.passwordmanager.flow.SecurityChallenge;
 public interface PasswordManagerService {
 	
 	/**
+	 * Generate a password.
+	 */
+	public String generatePassword();
+	
+	/**
 	 * <p>Gets the given user's security challenge question(s).</p>
 	 * @param username Username to retrieve security challenge questions for
 	 * @return SecurityChallenge object containing the security questions
 	 * and answers
 	 */
 	public SecurityChallenge getUserSecurityChallenge(String username);
+	
+	/**
+	 * <p>Method for setting up the user's lock account.</p>
+	 * @param username 
+	 */
+	public void setAccountLock(String username);
+	
+	/**
+	 * <p>Method for setting up the user's unlock account.</p>
+	 * @param username 
+	 */
+	public void setAccountUnLock(String username);
+	
+	/**
+	 * <p>Method for setting up the user's must change password.</p>
+	 * @param username 
+	 */
+	public void setMustChangePassword(String username);
 	
 	/**
 	 * <p>Method for setting up the user's security challenge question(s).</p>
