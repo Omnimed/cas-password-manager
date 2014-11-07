@@ -123,9 +123,10 @@ public abstract class AbstractLdapServer implements LdapServer, InitializingBean
 		try {
 			userAccountControl = (String) userAccountControlAttr.get();			
 		} catch (NamingException e) {
-			
+			logger.error("Exception : " + e);
 		}
 		
+		/* Ldap code : 66048	Enabled, Password Doesn't Expire */
 		if (userAccountControl != "66048") {
 			ModificationItem[] modificationItems = new ModificationItem[1];
 			

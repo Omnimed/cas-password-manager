@@ -2,7 +2,7 @@
 <!--
   ~ Licensed to Jasig under one or more contributor license
   ~ agreements. See the NOTICE file distributed with this work
-  ~ for additional ERRORrmation regarding copyright ownership.
+  ~ for additional intormation regarding copyright ownership.
   ~ Jasig licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file
   ~ except in compliance with the License.  You may obtain a
@@ -87,7 +87,7 @@
     </logger>
 
     <!--
-        WARNING: Setting the org.springframework logger to DEBUG displays debug ERRORrmation about
+        WARNING: Setting the org.springframework logger to DEBUG displays debug information about
         the request parameter values being bound to the command objects.  This could expose your
         password in the log file.  If you are sharing your log files, it is recommend you selectively
         apply DEBUG level logging on a an org.springframework.* package level (i.e. org.springframework.dao)
@@ -133,7 +133,7 @@
     </logger>
     
     <logger name="net.unicon.cas.passwordmanager" additivity="false">
-        <level value="TRACE" />
+        <level value="ERROR" />
         <appender-ref ref="cas" />
         <appender-ref ref="console" />
     </logger>
