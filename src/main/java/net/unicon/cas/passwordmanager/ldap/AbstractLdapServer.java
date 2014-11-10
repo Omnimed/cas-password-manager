@@ -1,8 +1,10 @@
 package net.unicon.cas.passwordmanager.ldap;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.security.authentication.AccountStatusException;
 import javax.naming.NameClassPair;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -81,7 +83,61 @@ public abstract class AbstractLdapServer implements LdapServer, InitializingBean
 	public void ldapModify(String username, ModificationItem[] modificationItems) {
 		DistinguishedName dn = searchForDn(username);
 		logger.debug("ldapModify for dn " + dn + "," + ldapContextSource.getBaseLdapPathAsString());
+		logger.debug("ldapModify modification item 0 " + modificationItems[0].toString());
+		
 		ldapTemplate.modifyAttributes(dn, modificationItems);
+	}
+
+	@Override
+	public void setAccountLock(String username) {
+		logger.debug("Set user lock for user " + username);
+		for (int i = 0; i < 5; i++) {
+			try {
+				verifyPassword(username, "WRONG PASSWORD");
+			}
+			catch (AccountStatusException e) {
+				break;
+			}
+		}
+	}
+
+	@Override
+	public void setAccountUnLock(String username) {
+		logger.debug("Set user unlock for user " + username);
+		ModificationItem[] modificationItems = new ModificationItem[1];
+		
+		Attribute lockoutTime = new BasicAttribute("lockoutTime", "0");
+		ModificationItem lockoutTimeItem = new ModificationItem(DirContext.REPLACE_ATTRIBUTE, lockoutTime);
+
+		modificationItems[0] = lockoutTimeItem;
+		ldapModify(username, modificationItems);
+	}
+
+	@Override
+	public void setMustChangePassword(String username) throws Exception {
+		logger.debug("Set user must change password for user " + username);
+		
+		Attribute userAccountControlAttr = (Attribute) ldapLookup(username, new DefaultUserAccountControlAttributesMapper(username));
+		String userAccountControl = "";
+		
+		try {
+			userAccountControl = (String) userAccountControlAttr.get();			
+		} catch (NamingException e) {
+			logger.error("Exception : " + e);
+		}
+		
+		/* Ldap code : 66048	Enabled, Password Doesn't Expire */
+		if (userAccountControl != "66048") {
+			ModificationItem[] modificationItems = new ModificationItem[1];
+			
+			Attribute pwdLastSet = new BasicAttribute("pwdLastSet", "0");
+			ModificationItem pwdLastSetItem = new ModificationItem(DirContext.REPLACE_ATTRIBUTE, pwdLastSet);
+	
+			modificationItems[0] = pwdLastSetItem;
+			ldapModify(username, modificationItems);
+		} else {
+			throw new Exception();
+		}
 	}
 	
 	@Override
@@ -285,6 +341,26 @@ public abstract class AbstractLdapServer implements LdapServer, InitializingBean
 			logger.debug("Found " + securityQuestions.size() 
 					+ " default security questions for " + username);
 			return new SecurityChallenge(username, securityQuestions);
+		}
+	}
+
+	protected class DefaultUserAccountControlAttributesMapper implements AttributesMapper {
+
+		private final Log logger = LogFactory.getLog(this.getClass());
+		private String username;
+		
+		public DefaultUserAccountControlAttributesMapper(String username) {
+			this.username = username;
+		}
+		
+		@Override
+		public Object mapFromAttributes(Attributes attrs) throws NamingException {
+			
+			logger.debug("Mapping attributes for " + username);
+			
+			Attribute userAccountControlAttr = attrs.get("userAccountControl");
+			
+			return userAccountControlAttr;
 		}
 	}
 

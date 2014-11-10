@@ -1,6 +1,7 @@
 package net.unicon.cas.passwordmanager.service;
 
 import java.util.List;
+import java.lang.StringBuffer;
 
 import javax.validation.constraints.Size;
 
@@ -26,6 +27,24 @@ public class LdapPasswordManagerService implements PasswordManagerService {
 	private PasswordManagerLockoutService lockoutService;
 
 	@Override
+	public String generatePassword() {
+		final String NUM = "0123456789";
+		final String ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		final String MINALPHA = "abcdefghijklmnopqrstuvwxyz";
+		
+		StringBuffer sb = new StringBuffer(9);
+			for (int i=0;  i<3;  i++) {
+				int ndxN = (int)(Math.random()*NUM.length());
+				int ndxA = (int)(Math.random()*ALPHA.length());
+				int ndxM = (int)(Math.random()*MINALPHA.length());
+				sb.append(NUM.charAt(ndxN));
+				sb.append(ALPHA.charAt(ndxA));
+				sb.append(MINALPHA.charAt(ndxM));
+			}
+		return sb.toString();
+	}
+	
+	@Override
 	public SecurityChallenge getUserSecurityChallenge(String username) {
 		
 		for(LdapServer server : ldapServers) {
@@ -44,6 +63,78 @@ public class LdapPasswordManagerService implements PasswordManagerService {
 				// ignore it... try the next server
 			} catch(ObjectRetrievalException ex) {
 				logger.debug("Multiple results found for " + username);
+				// ignore it... try the next server
+			}
+		}
+		
+		throw new NameNotFoundException("Couldn't find username " 
+				+ username + " in any of provided servers.");
+	}
+
+	@Override
+	public void setAccountLock(String username) {
+		
+		for(LdapServer server : ldapServers) {
+			try {
+				server.setAccountLock(username);
+				if(logger.isDebugEnabled()) {
+					logger.debug("Successfully lock account for " + username);
+				}
+				return;
+			} catch(NameNotFoundException ex) {
+				logger.debug("Didn't find " + username + " in " + server.getDescription());
+				// ignore it... try the next server
+			} catch(ObjectRetrievalException ex) {
+				logger.debug("Multiple results found for " + username);
+				// ignore it... try the next server
+			}
+		}
+		
+		throw new NameNotFoundException("Couldn't find username " 
+				+ username + " in any of provided servers.");
+	}
+
+	@Override
+	public void setAccountUnLock(String username) {
+		
+		for(LdapServer server : ldapServers) {
+			try {
+				server.setAccountUnLock(username);
+				if(logger.isDebugEnabled()) {
+					logger.debug("Successfully unlock account for " + username);
+				}
+				return;
+			} catch(NameNotFoundException ex) {
+				logger.debug("Didn't find " + username + " in " + server.getDescription());
+				// ignore it... try the next server
+			} catch(ObjectRetrievalException ex) {
+				logger.debug("Multiple results found for " + username);
+				// ignore it... try the next server
+			}
+		}
+		
+		throw new NameNotFoundException("Couldn't find username " 
+				+ username + " in any of provided servers.");
+	}
+
+	@Override
+	public void setMustChangePassword(String username) {
+		
+		for(LdapServer server : ldapServers) {
+			try {
+				server.setMustChangePassword(username);
+				if(logger.isDebugEnabled()) {
+					logger.debug("Successfully set must change password for " + username);
+				}
+				return;
+			} catch(NameNotFoundException ex) {
+				logger.debug("Didn't find " + username + " in " + server.getDescription());
+				// ignore it... try the next server
+			} catch(ObjectRetrievalException ex) {
+				logger.debug("Multiple results found for " + username);
+				// ignore it... try the next server
+			} catch(Exception e) {
+				logger.debug("Exception : " + e);
 				// ignore it... try the next server
 			}
 		}

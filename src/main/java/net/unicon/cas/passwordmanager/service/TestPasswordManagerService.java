@@ -13,6 +13,11 @@ public class TestPasswordManagerService implements PasswordManagerService {
 	private final Random random = new Random();
 
 	@Override
+	public String generatePassword() {
+		return "";
+	}
+	
+	@Override
 	public SecurityChallenge getUserSecurityChallenge(String username) {
 		
 		SecurityQuestion q1 = new SecurityQuestion("Why?","Because");
@@ -42,6 +47,18 @@ public class TestPasswordManagerService implements PasswordManagerService {
 		SecurityChallenge securityChallenge = new SecurityChallenge(username, securityQuestions);
 		
 		return securityChallenge;	
+	}
+
+	@Override
+	public void setAccountLock(String username) {
+	}
+
+	@Override
+	public void setAccountUnLock(String username) {
+	}
+
+	@Override
+	public void setMustChangePassword(String username) {
 	}
 
 	@Override

@@ -90,7 +90,7 @@
 				var pswd = $(this).val();
 				
 				//validate the length
-				validateCondition($('#length'), pswd.length < 8);
+				validateCondition($('#length'), pswd.length >= 8);
 
 				//validate capital letter
 				validateCondition($('#capital'), pswd.match(/[A-Z]/) && pswd.match(/[a-z]/));
@@ -113,7 +113,7 @@
 				var pswd = $(this).val();
 				
 				//validate the length
-				validateCondition($('#same'), pswd != newPswd);
+				validateCondition($('#same'), pswd == newPswd);
 				
 				isSubmitReady();
 			}).focus(function() {
@@ -138,8 +138,8 @@
 				$('#capital').show();
 				$('#length').show();
 				$('#number').show();
-				$('#pswd_info').css({ top: $(this).offset().top - 50 + 'px' });
-				$('#pswd_info').css({ left: $(this).width() + $(this).offset().left + 30 + 'px' });
+				$('#pswd_info').css({ top: $('#newPassword').offset().top - 50 + 'px' });
+				$('#pswd_info').css({ left: $('#newPassword').width() + $('#newPassword').offset().left + 30 + 'px' });
 				$('#pswd_info').show();				
 			}
 			
@@ -148,8 +148,8 @@
 				$('#capital').hide();
 				$('#length').hide();
 				$('#number').hide();
-				$('#pswd_info').css({ top: $(this).offset().top - 15 + 'px' });
-				$('#pswd_info').css({ left: $(this).width() + $(this).offset().left + 30 + 'px' });
+				$('#pswd_info').css({ top: $('#confirmNewPassword').offset().top - 35 + 'px' });
+				$('#pswd_info').css({ left: $('#confirmNewPassword').width() + $('#confirmNewPassword').offset().left + 30 + 'px' });
 				$('#pswd_info').show();			
 			}
 			
@@ -173,8 +173,12 @@
 
 				if (isReady) {
 					$('#submit').removeAttr('disabled');
+					$('#submit').attr('aria-disabled', false);
+					$('#submit').removeClass('ui-state-disabled');	
 				} else {
 					$('#submit').attr('disabled','disabled');
+					$('#submit').attr('aria-disabled', true);
+					$('#submit').addClass('ui-state-disabled');
 				}
 				
 			}

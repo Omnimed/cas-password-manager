@@ -3,9 +3,11 @@ package net.unicon.cas.passwordmanager.flow;
 import java.util.List;
 
 import net.unicon.cas.passwordmanager.service.PasswordManagerLockoutService;
+import net.unicon.cas.passwordmanager.service.PasswordManagerService;
 import org.springframework.webflow.action.AbstractAction;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
+import net.unicon.cas.passwordmanager.UserLockedOutException;
 
 /**
  * <p>Action for checking the responses to users' security questions.</p>
@@ -13,7 +15,9 @@ import org.springframework.webflow.execution.RequestContext;
 public class CheckSecurityQuestionResponseAction extends AbstractAction {
     
     private static final String RESPONSE_PARAMETER_PREFIX = "response";
+
     private PasswordManagerLockoutService lockoutService;
+	private PasswordManagerService passwordManagerService; 
 
     @Override
     protected Event doExecute(RequestContext req) throws Exception {
@@ -35,15 +39,26 @@ public class CheckSecurityQuestionResponseAction extends AbstractAction {
         }
         
         if (!rslt) {
-        	lockoutService.registerIncorrectAttempt((String)req.getFlowScope().get("username"));
+        	try {
+            	lockoutService.registerIncorrectAttempt((String)req.getFlowScope().get("username"));	
+        	}
+        	catch (UserLockedOutException e) {
+            	passwordManagerService.setAccountLock((String)req.getFlowScope().get("username"));	
+        	}
+        	
         }
         
         return rslt ? success() : error(/* TODO:  Send error message to client */);
 
     }
 
+
 	public void setLockoutService(PasswordManagerLockoutService lockoutService) {
 		this.lockoutService = lockoutService;
+	}
+	public void setPasswordManagerService(
+			PasswordManagerService passwordManagerService) {
+		this.passwordManagerService = passwordManagerService;
 	}
 
 }
